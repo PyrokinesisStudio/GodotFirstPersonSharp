@@ -1,0 +1,37 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+; 
+; Format: 
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=3
+
+[application]
+
+config/name="GodotFPS"
+run/main_scene="res://Assets/Scenes/Main.tscn"
+config/icon="res://Assets/Sprites/icon.png"
+
+[autoload]
+
+GameManager="*res://Assets/Scripts/Singletons/GameManager.cs"
+
+[display]
+
+window/size/width=850
+window/size/height=480
+
+[gdnative]
+
+singletons=[  ]
+
+[rendering]
+
+quality/directional_shadow/size=512
+quality/directional_shadow/size.mobile=512
+quality/shadow_atlas/size=512
+quality/shadow_atlas/size.mobile=512
+quality/shadows/filter_mode=0
+environment/default_environment="res://Assets/DefaultEnvironment.tres"

@@ -1,0 +1,209 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://Assets/Scripts/Player/PlayerController.cs" type="Script" id=1]
+[ext_resource path="res://Assets/Scripts/Player/CameraFirstPerson.cs" type="Script" id=2]
+[ext_resource path="res://Assets/Scripts/Player/PlayerViewModel.cs" type="Script" id=3]
+[ext_resource path="res://Assets/Models/Weapons/M4A1/M4A1.tscn" type="PackedScene" id=4]
+
+[sub_resource type="CapsuleShape" id=1]
+
+radius = 0.4
+height = 0.5
+
+[sub_resource type="RayShape" id=2]
+
+length = 0.3
+
+[sub_resource type="CapsuleMesh" id=3]
+
+radius = 0.4
+mid_height = 0.7
+radial_segments = 64
+rings = 8
+
+[sub_resource type="CubeMesh" id=4]
+
+size = Vector3( 0.6, 0.2, 0.2 )
+subdivide_width = 0
+subdivide_height = 0
+subdivide_depth = 0
+
+[sub_resource type="SpatialMaterial" id=5]
+
+render_priority = 0
+flags_transparent = false
+flags_unshaded = false
+flags_vertex_lighting = false
+flags_no_depth_test = false
+flags_use_point_size = false
+flags_world_triplanar = false
+flags_fixed_size = false
+vertex_color_use_as_albedo = false
+vertex_color_is_srgb = false
+params_diffuse_mode = 0
+params_specular_mode = 0
+params_blend_mode = 0
+params_cull_mode = 0
+params_depth_draw_mode = 0
+params_line_width = 1.0
+params_point_size = 1.0
+params_billboard_mode = 0
+params_grow = false
+params_use_alpha_scissor = false
+albedo_color = Color( 0.261719, 0.261719, 0.261719, 1 )
+metallic = 0.0
+metallic_specular = 0.5
+metallic_texture_channel = 0
+roughness = 0.0
+roughness_texture_channel = 0
+emission_enabled = false
+normal_enabled = false
+rim_enabled = false
+clearcoat_enabled = false
+anisotropy_enabled = false
+ao_enabled = false
+depth_enabled = false
+subsurf_scatter_enabled = false
+transmission_enabled = false
+refraction_enabled = false
+detail_enabled = false
+uv1_scale = Vector3( 1, 1, 1 )
+uv1_offset = Vector3( 0, 0, 0 )
+uv1_triplanar = false
+uv1_triplanar_sharpness = 1.0
+uv2_scale = Vector3( 1, 1, 1 )
+uv2_offset = Vector3( 0, 0, 0 )
+uv2_triplanar = false
+uv2_triplanar_sharpness = 1.0
+proximity_fade_enable = false
+proximity_fade_distance = 1.0
+distance_fade_enable = false
+_sections_unfolded = [ "Albedo" ]
+
+[node name="PlayerController" type="RigidBody"]
+
+input_ray_pickable = true
+input_capture_on_drag = false
+collision_layer = 1
+collision_mask = 1
+mode = 2
+mass = 1.0
+friction = 0.0
+bounce = 0.0
+gravity_scale = 1.0
+custom_integrator = false
+continuous_cd = false
+contacts_reported = 1
+contact_monitor = true
+sleeping = false
+can_sleep = false
+axis_lock = 0
+linear_velocity = Vector3( 0, 0, 0 )
+linear_damp = -1.0
+angular_velocity = Vector3( 0, 0, 0 )
+angular_damp = -1.0
+script = ExtResource( 1 )
+
+[node name="ColBody" type="CollisionShape" parent="."]
+
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.95, 0 )
+shape = SubResource( 1 )
+disabled = false
+_sections_unfolded = [ "Transform" ]
+
+[node name="ColRay" type="CollisionShape" parent="."]
+
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.3, 0 )
+shape = SubResource( 2 )
+disabled = false
+_sections_unfolded = [ "Transform" ]
+
+[node name="FloorRay" type="RayCast" parent="."]
+
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0 )
+enabled = true
+cast_to = Vector3( 0, -0.5, 0 )
+collision_layer = 1
+type_mask = 15
+_sections_unfolded = [ "Transform" ]
+
+[node name="Body" type="Spatial" parent="."]
+
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1, 0 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="Mesh" type="MeshInstance" parent="Body"]
+
+editor/display_folded = true
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, -0.35, 0 )
+visible = false
+layers = 1
+material_override = null
+cast_shadow = 3
+extra_cull_margin = 0.0
+use_in_baked_light = false
+lod_min_distance = 0.0
+lod_min_hysteresis = 0.0
+lod_max_distance = 0.0
+lod_max_hysteresis = 0.0
+mesh = SubResource( 3 )
+skeleton = NodePath("..")
+material/0 = null
+_sections_unfolded = [ "Geometry", "Transform", "Visibility" ]
+
+[node name="Glasses" type="MeshInstance" parent="Body/Mesh"]
+
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.290021, -0.440941 )
+layers = 1
+material_override = null
+cast_shadow = 3
+extra_cull_margin = 0.0
+use_in_baked_light = false
+lod_min_distance = 0.0
+lod_min_hysteresis = 0.0
+lod_max_distance = 0.0
+lod_max_hysteresis = 0.0
+mesh = SubResource( 4 )
+skeleton = NodePath("..")
+material/0 = SubResource( 5 )
+_sections_unfolded = [ "Geometry", "material" ]
+
+[node name="Camera" type="Camera" parent="Body"]
+
+projection = 0
+fov = 60.0
+near = 0.01
+far = 100.0
+keep_aspect = 1
+current = true
+cull_mask = 1048575
+environment = null
+h_offset = 0.0
+v_offset = 0.0
+doppler/tracking = 0
+script = ExtResource( 2 )
+
+[node name="FiringRaycast" type="RayCast" parent="Body/Camera"]
+
+enabled = true
+cast_to = Vector3( 0, 0, -100 )
+collision_layer = 1
+type_mask = 15
+
+[node name="ViewModel" type="Spatial" parent="Body/Camera"]
+
+transform = Transform( 0.929405, 0, 0, 0, 0.929405, 0, 0, 0, 0.929405, 0, 0, 0 )
+script = ExtResource( 3 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="ZoomOrigin" type="Position3D" parent="Body/Camera/ViewModel"]
+
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.100838, -0.021682, 0 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="Weapon" parent="Body/Camera/ViewModel" instance=ExtResource( 4 )]
+
+transform = Transform( 0.024659, 0, 0, 0, 0.024659, 0, 0, 0, 0.024659, 0, 0, -0.05 )
+_sections_unfolded = [ "Transform" ]
+
+
